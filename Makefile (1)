@@ -1,0 +1,23 @@
+# Variables for compiler and flags
+CC = gcc
+CFLAGS = -Wall -O2
+
+
+# Targets 
+all: main
+
+# Building the final executable
+main: functions.o main.o
+	$(CC) $(CFLAGS) -o main functions.o main.o
+
+# Compile functions.c
+functions.o: functions.c functions.h
+	$(CC) $(CFLAGS) -c functions.c -o functions.o
+
+# Compile main.c
+main.o: main.c functions.h
+	$(CC) $(CFLAGS) -c main.c -o main.o
+
+# Clean rule to remove object files and executable
+clean:
+	rm -f *.o main
